@@ -1,0 +1,6 @@
+/workspaces/common-sandbox/ApiVisualiser/obj/Debug/net9.0/ApiVisualiser.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/common-sandbox/ApiVisualiser/obj/Debug/net9.0/ApiVisualiser.AssemblyInfoInputs.cache
+/workspaces/common-sandbox/ApiVisualiser/obj/Debug/net9.0/ApiVisualiser.AssemblyInfo.cs
+/workspaces/common-sandbox/ApiVisualiser/obj/Debug/net9.0/ApiVisualiser.csproj.CoreCompileInputs.cache
+/workspaces/common-sandbox/ApiVisualiser/obj/Debug/net9.0/ApiVisualiser.MvcApplicationPartsAssemblyInfo.cache
+/workspaces/common-sandbox/ApiVisualiser/obj/Debug/net9.0/ApiVisualiser.sourcelink.json
