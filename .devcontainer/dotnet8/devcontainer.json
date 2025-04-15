@@ -13,6 +13,13 @@
 		"cpus": 4,
 		"memory": "16gb",
 		"storage": "32gb"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.csdevkit"
+			]
+		}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
