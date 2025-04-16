@@ -2231,4 +2231,93 @@ html {
   }
 }
 
+/*------------------------------------*\
+    BRANDING
+\*------------------------------------*/
+.ds_site-branding {
+  overflow: hidden;
+  padding: 12px 0;
+  position: relative;
+}
+.ds_site-branding__logo {
+  height: 32px;
+  margin-right: 1.5rem;
+}
+.ds_site-branding__logo-image {
+  height: 32px;
+  pointer-events: none;
+  width: auto;
+}
+.ds_site-branding__link {
+  color: currentColor;
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  position: relative;
+  transition-duration: 0s !important;
+}
+.ds_site-branding__link:hover:not(:focus) {
+  background: transparent;
+  outline-color: transparent;
+}
+.ds_site-branding__link::after {
+  background-color: currentColor;
+  bottom: -5px;
+  content: "";
+  height: 0.16em;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  right: 50%;
+  transition: left 0.2s, right 0.2s, opacity 0.2s;
+}
+.ds_site-branding__link:hover::after {
+  left: 0;
+  opacity: 1;
+  right: 0;
+}
+.ds_site-branding__title {
+  font-weight: 300;
+  line-height: 1.5rem;
+}
+.ds_site-branding__title::before {
+  background: #0065bd;
+  bottom: 12px;
+  content: "";
+  position: absolute;
+  margin-left: -0.75rem;
+  top: 12px;
+  width: 1px;
+}
+.ds_site-branding__logo, .ds_site-branding__title {
+  float: left;
+}
+
+@media (min-width: 768px) {
+  .ds_site-branding__link {
+    margin-bottom: 0;
+  }
+  .ds_site-branding__logo {
+    height: 40px;
+    margin-right: 3rem;
+  }
+  .ds_site-branding__logo-image {
+    height: 40px;
+  }
+  .ds_site-branding__title::before {
+    margin-left: -1.5rem;
+  }
+}
+@supports (display: flex) {
+  .ds_site-branding {
+    align-items: center;
+    display: flex;
+    flex-flow: wrap;
+    gap: 1rem 0;
+  }
+  .ds_site-branding__logo, .ds_site-branding__title {
+    float: none;
+  }
+}
+
 /*# sourceMappingURL=app.css.map */
