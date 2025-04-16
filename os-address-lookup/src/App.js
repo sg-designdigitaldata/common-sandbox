@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+// import './App.css';
+import { initAll } from "@scottish-government/design-system/src/all";
+import Header from './components/Header';
+import Footer from "./components/Footer";
+import BodyWrapper from "./components/Body";
 
 function App() {
+
+  useEffect(() => {
+    initAll();
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <body>
+      <div className="ds_page">
+        <div className="ds_page__top">
+          {/* <!--Notifications
+          Site header
+          Site navigation
+            --> */}
+          <Header />
+        </div>
+
+        <div className="ds_page__middle">
+          {/* <!--
+          Main content
+            --> */}
+          <BodyWrapper />
+        </div>
+
+        <div className="ds_page__bottom">
+          {/* <!--
+          Footer
+          Scripts
+            --> */}
+          <Footer />
+        </div>
+      </div>
+    </body>
   );
 }
 
