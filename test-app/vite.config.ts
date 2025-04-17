@@ -4,6 +4,13 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
+	css: {
+		preprocessorOptions: {
+			sass: {
+				quietDeps: true
+			}
+		}
+	},
 	test: {
 		workspace: [
 			{
