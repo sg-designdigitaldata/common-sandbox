@@ -4,7 +4,6 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-	<link rel="stylesheet" href="src/lib/app.sass" />
 	<script type="text/javascript" src="design-system.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	%sveltekit.head%
@@ -12,91 +11,8 @@
 
 <body data-sveltekit-preload-data="hover">
 
-	<header class="ds_site-header  ds_site-header--gradient" role="banner">
-		<div class="ds_wrapper">
-			<div class="ds_site-header__content">
-				<div class="ds_site-branding">
-					<a href="/" class="ds_site-branding__logo  ds_site-branding__link" aria-label="Scottish Government">
-						<img class="ds_site-branding__logo-image" alt="Scottish Government" width="300" height="58"
-							src="/scottish-government-svg.svg" />
-					</a>
-					<div class="ds_site-branding__title" data-header="header-title">
-						Testing SvelteKit
-					</div>
-				</div>
-			</div>
-		</div>
+	<div style="display: contents">%sveltekit.body%</div>
 
-		<div class="ds_phase-banner">
-			<div class="ds_wrapper">
-				<p class="ds_phase-banner__content">
-					<strong class="ds_tag  ds_phase-banner__tag">
-						beta
-					</strong>
-					<span class="ds_phase-banner__text">
-						This is a new service. Your feedback will help us to improve it.
-					</span>
-				</p>
-			</div>
-		</div>
-	</header>
-
-	<div class="ds_page__middle">
-		<div class="ds_wrapper">
-			<main id="main-content">
-				<div style="display: contents">%sveltekit.body%</div>
-			</main>
-		</div>
-	</div>
-
-	<div class="ds_page__bottom">
-		<div class="ds_back-to-top" data-module="ds-back-to-top">
-			<a href="#page-top" class="ds_back-to-top__button js-has-tracking-event" data-navigation="backtotop">Back to
-				top <svg class="ds_icon  ds_back-to-top__icon" aria-hidden="true" role="img">
-					<use href="/icons.stack.svg#arrow_upward"></use>
-				</svg></a>
-		</div>
-		<footer class="ds_site-footer">
-			<div class="ds_wrapper">
-				<div class="ds_site-footer__content">
-					<ul class="ds_site-footer__site-items">
-						<li class="ds_site-items__item">
-							<a data-footer="footer-link-1" href="/privacy">Privacy</a>
-						</li>
-						<li class="ds_site-items__item">
-							<a data-footer="footer-link-2" href="/cookies">Cookies</a>
-						</li>
-						<li class="ds_site-items__item">
-							<a data-footer="footer-link-3" href="/accessibility">Accessibility</a>
-						</li>
-					</ul>
-
-					<div class="ds_site-footer__copyright">
-						<p>All content is available under the <a data-footer="copyright"
-								href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
-								target="_blank">Open Government Licence v3.0</a>, except for graphic assets and where
-							otherwise stated</p>
-						<p>&copy; Crown Copyright</p>
-					</div>
-
-					<div class="ds_site-footer__org">
-						<a data-footer="footer-logo" class="ds_site-footer__org-link" alt="Scottish Government"
-							href="https://www.gov.scot/" target="_blank">
-							<img class="ds_site-footer__org-logo" alt="Scottish Government" width="300" height="58"
-								src="/scottish-government-svg.svg" />
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<script type="text/javascript">
-				// Initialize SG Design Library
-				document.addEventListener("DOMContentLoaded", function () {
-					window.DS.initAll();
-				});
-			</script>
-		</footer>
-	</div>
 </body>
 
 </html>
