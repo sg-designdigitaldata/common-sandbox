@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Postcode Search</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body { font-family: Arial; margin: 2em; }
+        input, button { padding: 0.5em; margin-right: 0.5em; }
+        ul { margin-top: 1em; }
+    </style>
+</head>
+<body>
+
+    <h1>Search Addresses by Postcode</h1>
+
+    <input type="text" id="postcode" placeholder="Enter postcode (e.g. SO16 0AS)">
+    <button onclick="search()">Search</button>
+
+    <ul id="results"></ul>
+
+    <script>
+        async function search() {
+            const postcode = document.getElementById('postcode').value.trim();
+            const resultsList = document.getElementById('results');
+            resultsList.innerHTML = '';
+
+            if (!postcode) {
+                alert('Please enter a postcode.');
+                return;
+            }
+
+            const apiKey = 'nLWMMF3c567DLus9Tc1QVpAQzlOuBPji';
+            const url = `https://api.os.uk/search/places/v1/postcode?postcode=${encodeURIComponent(postcode)}&key=${apiKey}`;
+
+            try {
+                const response = await axios.get(url);
+                const results = response.data.results;
+
+                if (results && results.length > 0) {
+                    results.forEach((result, i) => {
+                        const li = document.createElement('li');
+                        li.textContent = result.DPA.ADDRESS;
+                        resultsList.appendChild(li);
+                    });
+                } else {
+                    resultsList.innerHTML = '<li>No addresses found.</li>';
+                }
+            } catch (error) {
+                console.error(error);
+                resultsList.innerHTML = '<li>Error fetching data. Check console for details.</li>';
+            }
+        }
+    </script>
+
+</body>
+</html>
