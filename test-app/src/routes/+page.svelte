@@ -1,2 +1,17 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+    import PostCode from "$lib/components/PostCode.svelte" ;
+
+    let postcode = $state('');
+</script>
+
+<h2>
+    Postcode lookup
+</h2>
+
+<!-- input component -->
+
+<PostCode onChange={newValue => postcode = newValue}/>
+
+<p>You entered: {postcode.toUpperCase()}</p>
+
+<!-- link button component -->
