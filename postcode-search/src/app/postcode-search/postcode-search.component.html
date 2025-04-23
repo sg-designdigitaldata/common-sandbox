@@ -1,1 +1,8 @@
-<p>postcode-search works!</p>
+<h2>Postcode Address Test Finder</h2>
+
+<input [(ngModel)]="postcode" placeholder="Enter postcode" />
+<button (click)="search()">Search</button>
+
+<ul>
+  <li *ngFor="let address of addresses">{{ address }}</li>
+</ul>
