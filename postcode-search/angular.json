@@ -27,7 +27,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/@scottish-government/design-system/dist/css/design-system.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
