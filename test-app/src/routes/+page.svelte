@@ -8,10 +8,5 @@
     Postcode lookup
 </h2>
 
-<!-- input component -->
+<PostCode  />
 
-<PostCode onChange={newValue => postcode = newValue}/>
-
-<p>You entered: {postcode.toUpperCase()}</p>
-
-<!-- link button component -->
