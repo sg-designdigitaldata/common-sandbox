@@ -14,6 +14,7 @@ import axios from 'axios';
 export class PostcodeSearchComponent {
   postcode: string = '';
   addresses: string[] = [];
+  localauthorities: string[] = [];
   apiKey: string = 'nLWMMF3c567DLus9Tc1QVpAQzlOuBPji';
 
   async search() {
@@ -26,6 +27,7 @@ export class PostcodeSearchComponent {
       const results = response.data.results;
 
       this.addresses = results?.map((res: any) => res.DPA.ADDRESS) || [];
+      this.localauthorities = results?.map((res: any) => res.DPA.LOCAL_CUSTODIAN_CODE_DESCRIPTION) || [];
     } catch (err) {
       console.error('Error:', err);
       this.addresses = ['Error retrieving data.'];

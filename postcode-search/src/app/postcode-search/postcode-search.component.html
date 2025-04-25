@@ -1,8 +1,29 @@
 <h1>Postcode Address Finder</h1>
  
-<input [(ngModel)]="postcode" placeholder="Enter postcode" />
+<input [(ngModel)]="postcode" class="ds_input  ds_input--fixed-10"  placeholder="Enter postcode" />
 <button (click)="search()">Search</button>
+<!-- 
+  <ul class="ds_skip-links__list">
+    <li *ngFor="let address of addresses" class="ds_skip-links__item">{{ address }}</li>
+  </ul> -->
 
-<ul>
-  <li *ngFor="let address of addresses">{{ address }}</li>
-</ul>
+
+<div class="ds_accordion" data-module="ds-accordion">
+  <div class="ds_accordion-item">
+    <input type="checkbox" class="visually-hidden ds_accordion-item__control">
+    <div class="ds_accordion-item__header" *ngFor="let address of addresses">
+        <!-- <h2 class="ds_skip-links__item" id="panel-1-heading" class="ds_accordion-item__title" >
+          {{ address }}
+        </h2> -->
+        <span class="ds_accordion-item__indicator"></span>
+        <label class="ds_accordion-item__label" for="panel-1">{{ address }}<span class="visually-hidden">Show this section</span></label>
+    </div>
+
+    
+    <div class="ds_accordion-item__body" *ngFor="let localauthority of localauthorities">
+      <p>{{ localauthority }}</p>
+      <p>xxx</p>
+    </div>
+  </div>
+</div>
+
