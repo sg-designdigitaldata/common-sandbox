@@ -1,0 +1,127 @@
+﻿@page "/address-lookup"
+@using System.ComponentModel.DataAnnotations
+@using System.Web
+@using System.Text.Json
+@using System.Text.Json.Nodes
+@using Helpers
+@using System.Dynamic
+@using Models
+@inject IHttpClientFactory httpClientFactory
+
+
+<PageTitle>Address Lookup</PageTitle>
+
+<div class="ds_layout__header">
+    <h3>Api Visualiser</h3>
+</div>
+
+<div class="ds_layout__content">
+    <EditForm EditContext="editContext" OnValidSubmit="Submit" FormName="SubmitApi">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <label class="ds_label">
+            Post Code: 
+            <InputText class="ds_input" @bind-Value="Model!.PostCode" />
+        </label>
+        <button class="ds_button" type="submit">Submit</button>
+    </EditForm>
+</div>
+
+<div class="ds_layout__list">
+@if(placesResponse != null && placesResponse!.header!.totalresults > 0)
+{
+    <div class="ds_accordion" data-module="ds-accordion">
+    <button type="button" class="ds_link  ds_accordion__open-all  js-open-all">Open all <span class="visually-hidden">sections</span></button>
+    @foreach (var place in placesResponse!.results!)
+    {
+        <div class="ds_accordion-item">
+            <input type="checkbox" class="visually-hidden  ds_accordion-item__control" id="panel-@place.DPA!.UPRN" aria-labelledby="panel-@place.DPA!.UPRN-heading">
+            <div class="ds_accordion-item__header">
+                <h2 id="panel-@place.DPA!.UPRN-heading" class="ds_accordion-item__title">
+                    @place.DPA!.ADDRESS
+                </h2>
+                <span class="ds_accordion-item__indicator"></span>
+                <label class="ds_accordion-item__label" for="panel-@place.DPA!.UPRN"><span class="visually-hidden">Show this section</span></label>
+            </div>
+            <div class="ds_accordion-item__body">
+                <p>@place.DPA!.LOCAL_CUSTODIAN_CODE_DESCRIPTION</p>
+                <p>UPRN: @place.DPA!.UPRN</p>
+            </div>
+        </div>
+    }
+    </div>
+}
+@if(placesResponse != null && placesResponse.header!.totalresults == 0)
+    {
+        <p>No results found for @Model?.PostCode</p>
+    }
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    public ApiGrab? Model { get; set; }
+    private EditContext? editContext;
+    private ValidationMessageStore? validationMessageStore;
+    private string? Output { get; set; }
+    public string? ErrorMessage { get; set; }
+    private HttpClient? httpClient { get; set; }
+    public PlacesResponse? placesResponse { get; set; }
+
+    protected override void OnInitialized()
+    {
+        httpClient = httpClientFactory.CreateClient();
+        Model ??= new();
+
+        editContext = new(Model);
+        editContext.OnValidationRequested += HandleValidationRequested;
+        validationMessageStore = new(editContext);
+
+        var options = new JsonReaderOptions
+        {
+            AllowTrailingCommas = true,
+            CommentHandling = JsonCommentHandling.Skip
+        };
+    }
+
+    private void HandleValidationRequested(object? sender,
+        ValidationRequestedEventArgs args)
+    {
+        validationMessageStore?.Clear();
+    }
+
+    private async Task Submit()
+    {
+        string? apiKey = Environment.GetEnvironmentVariable("OS_API_KEY");
+
+        if(httpClient != null)
+        {
+            var response = await httpClient.GetAsync($"https://api.os.uk/search/places/v1/postcode?postcode={Model!.PostCode}&key={apiKey}");
+            Output = await response.Content.ReadAsStringAsync();          
+            placesResponse = JsonSerializer.Deserialize<PlacesResponse>(Output, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                AllowTrailingCommas = true
+            });
+        }
+
+        Console.WriteLine($"New Postcode Submitted: {Model!.PostCode}");
+    }
+
+    public void Dispose()
+    {
+        if (editContext is not null)
+        {
+            editContext.OnValidationRequested -= HandleValidationRequested;
+        }
+    }
+
+    public class ApiGrab
+    {
+        [Required]
+        [RegularExpression(@"^[A-Za-z0-9]{3,4}\s[A-Za-z0-9]{3}$", ErrorMessage = "Postcode has an invalid format. Format should be, e.g. EH1 2AB.")]
+        public string? PostCode { get; set; }
+
+        public bool PostCodeFound { get; set;}
+    }
+}

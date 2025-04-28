@@ -1,0 +1,120 @@
+/*------------------------------------*\
+    FEATURE HEADER
+\*------------------------------------*/
+
+.ds_feature-header {
+    @include ds_responsive-margin(8, bottom);
+
+    &__title {
+        @include ds_h1-style;
+        @include ds_responsive-margin(1, bottom);
+
+        font-weight: $light;
+    }
+
+    &--background {
+        background-color: $ds_colour__background--tertiary;
+
+        @include checkAndFixDescendantLinkColour($ds_colour__link, $ds_colour__background--tertiary, 'feature header');
+        @include checkAndFixDescendantSecondaryButtonColour($ds_colour__button--secondary, $ds_colour__background--tertiary, 'feature header');
+    }
+
+    &__primary {
+        padding: px-to-rem(16px) 0;
+        position: relative;
+        z-index: 2;
+
+        @include media-query(medium) {
+            padding: px-to-rem(24px) 0;
+        }
+
+        @include media-query(large) {
+            padding: px-to-rem(40px) 0;
+        }
+    }
+
+    &--background &__primary {
+        padding-left: px-to-rem(16px);
+
+        @include media-query(medium-down) {
+            padding-right: px-to-rem(16px);
+        }
+
+        @include media-query(medium) {
+            padding-left: px-to-rem(24px);
+        }
+
+        @include media-query(large) {
+            padding-left: px-to-rem(40px);
+        }
+    }
+
+    &__secondary {
+        position: relative;
+        z-index: 1;
+    }
+
+    &__image {
+        display: block;
+        height: auto;
+        width: 100%;
+    }
+
+    @include media-query(medium) {
+        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-gap: 32px;
+
+        &__primary {
+            grid-area: 1/1/2/7;
+            margin-right: 0;
+
+            > :last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &__secondary {
+            grid-area: 1/7/2/13;
+        }
+
+        &--wide {
+            .ds_feature-header__primary {
+                grid-area: 1/1/2/9;
+                margin-right: 0;
+            }
+
+            .ds_feature-header__secondary {
+                grid-area: 1/9/2/13;
+            }
+        }
+    }
+}
+
+.ds_reversed .ds_feature-header__primary,
+.ds_reversed .ds_feature-header__primary a {
+    color: $ds_colour__text--reversed;
+}
+
+
+// ie
+.ds_feature-header {
+    @include media-query(medium) {
+        display: -ms-grid;
+        -ms-grid-columns: 1fr 32px 1fr;
+
+        &--wide {
+            -ms-grid-columns: 2fr 32px 1fr;
+        }
+
+        &__primary {
+            -ms-grid-column: 1;
+            -ms-grid-row-align: center;
+        }
+
+        &__secondary {
+            -ms-grid-column: 3;
+        }
+    }
+}

@@ -1,0 +1,45 @@
+/*------------------------------------*\
+    ERROR SUMMARY
+\*------------------------------------*/
+
+$foreground-colour: $ds_colour__state--negative !default;
+$link-colour: $foreground-colour;
+$link-hover-background-colour: adjustLuminance($link-colour, 0.83);
+$link-hover-colour: adjustForContrast(darken($link-colour, 12.5%), $link-hover-background-colour, 4.5);
+
+/// [1] compensate for border
+.ds_error-summary {
+    border: 0.25rem solid $foreground-colour;
+    padding: 1.25rem 1.75rem; /// [1]
+    @include ds_block-margins;
+    @include ds_last-child-no-margin;
+
+    &__title {
+        margin-top: 0;
+    }
+
+    &__list {
+        color: $foreground-colour;
+        font-weight: $bold;
+        list-style-type: none;
+        margin-left: 0;
+
+        a {
+            color: $link-colour;
+
+            &:hover:not(:focus) {
+                background-color: $link-hover-background-colour;
+                color: $link-hover-colour;
+                outline-color: $link-hover-background-colour;
+            }
+
+            &:focus {
+                color: $ds_colour__link--focus;
+            }
+        }
+
+        li {
+            margin-left: 0;
+        }
+    }
+}

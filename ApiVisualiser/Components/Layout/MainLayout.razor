@@ -1,20 +1,86 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<div class="ds_page">
+        <div class="ds_page__top">
+            <header class="ds_site-header  ds_site-header--gradient" role="banner">
+                <div class="ds_wrapper">
+                    <div class="ds_site-header__content">
+                        <div class="ds_site-branding">
+                            <a href="/" class="ds_site-branding__logo  ds_site-branding__link" aria-label="Scottish Government">
+                                <img class="ds_site-branding__logo-image" alt="Scottish Government" src="@Assets["lib/designsystem/images/scottish-government.svg"]" />
+                            </a>
+                            <div class="ds_site-branding__title">
+                                Api Visualiser
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="ds_site-header__navigation">
+                        <div class="ds_wrapper">
+                            <NavMenu />
+                        </div>
+                    </div>
+
+                <div class="ds_phase-banner">
+                    <div class="ds_wrapper">
+                        <p class="ds_phase-banner__content">
+                            <strong class="ds_tag  ds_phase-banner__tag">
+                                beta
+                            </strong>
+                            <span class="ds_phase-banner__text">
+                                This is a new service. Your <a href="mailto:">feedback</a> will help us to improve it.
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </header>
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+        <div class="ds_page__middle">
+            <div class="ds_wrapper">
+                
+                <main id="main-content" role="main" class="ds_layout ds_layout--search-results">  
+                    @Body
+                </main>
+            </div>
+        </div>
+
+        <div class="ds_page__bottom">
+            <div data-module="ds-back-to-top" class="ds_back-to-top">
+                <a href="#" class="ds_back-to-top__button" data-navigation="backtotop">Back to top <img class="ds_icon ds_back-to-top__icon" aria-hidden="true" role="img" alt="" src="~/lib/designsystem/assets/images/icons/svg/arrow_upward.svg" /></a>
+            </div>
+            <footer class="ds_site-footer">
+                <div class="ds_wrapper">
+                    <div class="ds_site-footer__content">
+                        <ul class="ds_site-footer__site-items">
+                            <li class="ds_site-items__item">
+                                <a data-footer="footer-link-1" asp-page="/Privacy">Privacy</a>
+                            </li>
+                            <li class="ds_site-items__item">
+                                <a data-footer="footer-link-2" asp-page="/Cookies">Cookies</a>
+                            </li>
+                            <li class="ds_site-items__item">
+                                <a data-footer="footer-link-3" asp-page="/Accessibility">Accessibility</a>
+                            </li>
+                        </ul>
+
+                        <div class="ds_site-footer__copyright">
+                            <div class="ds_site-footer__copyright-logo"><img src="~/lib/designsystem/assets/images/logos/ogl.svg" alt="" /></div>
+                            <p>All content is available under the <a data-footer="copyright" href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank">Open Government Licence v3.0</a>, except for graphic assets and where otherwise stated</p>
+                            <p>&copy; Crown Copyright</p>
+                        </div>
+
+                        <div class="ds_site-footer__org">
+                            <a data-footer="footer-logo" class="ds_site-footer__org-link" alt="Scottish Government" href="https://www.gov.scot/" target="_blank">
+                                <img class="ds_site-footer__org-logo" alt="Scottish Government" src="@Assets["lib/designsystem/images/scottish-government--min.svg"]" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.

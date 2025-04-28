@@ -24,8 +24,12 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/common-sandbox/ApiVisualiser/Components/Pages/ApiVisualiser.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BcGlWaXN1YWxpc2VyLnJhem9y
+[/workspaces/common-sandbox/ApiVisualiser/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/workspaces/common-sandbox/ApiVisualiser/Components/Pages/AddressLookup.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZGRyZXNzTG9va3VwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/workspaces/common-sandbox/ApiVisualiser/Components/Pages/Counter.razor]
@@ -55,7 +59,3 @@ build_metadata.AdditionalFiles.CssScope =
 [/workspaces/common-sandbox/ApiVisualiser/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-czxw3v0wjt
-
-[/workspaces/common-sandbox/ApiVisualiser/Components/Layout/NavMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-pvxstzeidm

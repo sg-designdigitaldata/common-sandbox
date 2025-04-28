@@ -1,0 +1,28 @@
+/*------------------------------------*\
+    FIELD GROUP
+\*------------------------------------*/
+
+.ds_field-group {
+
+    // Remove bottom margin of last field
+    > div:last-child {
+        margin-bottom: 0;
+
+        .ds_input {
+            margin-bottom: 0;
+        }
+    }
+
+    &--inline {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+
+        // Remove bottom margin of all fields
+        > div {
+            margin-bottom: 0;
+
+            @include ds_last-child-no-margin;
+        }
+    }
+}

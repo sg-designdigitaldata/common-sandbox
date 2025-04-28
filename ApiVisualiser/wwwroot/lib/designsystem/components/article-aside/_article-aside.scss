@@ -1,0 +1,23 @@
+/*------------------------------------*\
+    ARTICLE ASIDE
+\*------------------------------------*/
+
+.ds_article-aside {
+    @include ds_block-margins;
+    @include ds_small-size;
+    @include ds_responsive-padding(4, top);
+    position: relative;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &::before {
+        border-top: 2px solid $ds_colour__brand;
+        content: '';
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}

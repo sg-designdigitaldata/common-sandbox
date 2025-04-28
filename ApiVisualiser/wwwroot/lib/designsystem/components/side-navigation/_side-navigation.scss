@@ -1,0 +1,233 @@
+/*------------------------------------*\
+    SIDE NAVIGATION
+\*------------------------------------*/
+
+// modifiable vars
+$side-nav__expand-colour: $ds_colour__brand !default;
+
+// fixed vars
+$side-nav__outline-width: 2px;
+
+
+
+.ds_side-navigation {
+    @include ds_block-margins;
+    @include ds_small-size;
+
+    border: 1px solid $ds_colour__border;
+    position: relative;
+
+    /// [1] Allowance for 1px border on all sides of parent container
+    &__expand {
+        @include ds_blocklink;
+
+        background-color: $ds_colour__background--primary;
+        color: $side-nav__expand-colour;
+        cursor: pointer;
+        font-weight: $bold;
+        line-height: inherit;
+        margin: 0;
+        padding: 15px 47px 15px 15px; /// [1]
+        position: sticky;
+        text-align: left;
+        text-decoration: none;
+        top: 0;
+        transition: background-color $transition-in-time, box-shadow $transition-in-time;
+        width: 100%;
+        z-index: 2;
+
+        &--shadow {
+            box-shadow: 0px 5px 5px rgba(0,0,0,0.15);
+        }
+
+        &:hover:not(:focus) {
+            background-color: $ds_colour__link--hover__background;
+        }
+
+        &:hover .side-navigation__expand-indicator {
+            color: $ds_colour__link--hover;
+        }
+
+        &--shadow:focus {
+            box-shadow: 0 3px #333333, 0px 8px 5px rgba(0,0,0,0.15);
+        }
+    }
+
+    &__expand-indicator {
+        @include ds_chevron(down, 0.75rem);
+        border-width: 0px 0px 3px 3px;
+        position: absolute;
+        right: 23px;
+        top: 17px;
+        transition: transform 0.2s, top 0.2s;
+        pointer-events: none;
+    }
+
+    #show-side-navigation:focus ~ .ds_side-navigation__expand {
+        background: $ds_colour__blocklink-bg--focus;
+        box-shadow: 0 $link__border-width $ds_colour__link--focus__shadow;
+        color: $ds_colour__link--focus;
+        transition-duration: 0s;
+    }
+
+    #show-side-navigation:checked ~ .ds_side-navigation__expand .ds_side-navigation__expand-indicator {
+        top: 23px;
+        transform: rotate(-225deg);
+    }
+
+    #show-side-navigation:checked ~ .ds_side-navigation__expand:not(:focus):not(:hover) {
+        background-color: $ds_colour__link--current__background;
+        color: $ds_colour__link--current;
+    }
+
+    #show-side-navigation:checked ~ &__list,
+    #show-side-navigation:checked ~ &__list &__list {
+        display: block;
+    }
+
+    &__list {
+        display: none;
+        list-style-type: none;
+        margin: 8px 16px;
+    }
+
+    &__list &__list {
+        margin: 0 0 0 16px;
+    }
+
+    &__item {
+        position: relative;
+        margin-bottom: 0;
+
+        &--disabled {
+            text-decoration: line-through;
+        }
+    }
+
+    /// [2] vertical padding offsets the text slightly for visual balance
+    &__link {
+        @include ds_blocklink;
+
+        margin-bottom: 2px;
+        padding: 12px 40px 10px 16px; /// [2]
+        position: relative;
+        text-decoration: none;
+
+        &:not([href]) {
+            pointer-events: none;
+        }
+
+        &:hover,
+        &.ds_current {
+            position: relative;
+
+            &::before {
+                border-left: $side-nav__outline-width solid $ds_colour__border--highlight;
+                bottom: 0;
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+
+        &:focus {
+            box-shadow: 0 3px $ds_colour__link--focus__shadow;
+            z-index: 2;
+        }
+
+        &:focus::before {
+            content: none;
+        }
+
+        &.ds_current:not(:focus) {
+            background-color: $ds_colour__link--current__background;
+
+            &:hover {
+                background-color: $ds_colour__link--current__background;
+            }
+        }
+
+        &--inactive {
+            pointer-events: none;
+            background-color: $ds_colour__link--disabled__background;
+        }
+    }
+
+    // different style for third nav level (?)
+    &__list &__list &__list &__link {
+        padding-left: 24px;
+
+        &::before {
+            border-left: 4px solid $ds_colour__border;
+            bottom: 12px;
+            content: '';
+            left: 12px;
+            opacity: 0.26;
+            position: absolute;
+            right: 100%;
+            top: 12px;
+        }
+
+        &:hover,
+        &.ds_current {
+            &::before {
+                border-color: $ds_colour__border--highlight;
+                opacity: 1;
+            }
+        }
+
+        &:focus {
+            &::before {
+                border-color: $ds_colour__link--focus;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+@include ds_media-query(medium-down) {
+
+    .js-initialised.ds_side-navigation .ds_side-navigation__list {
+        display: block;
+    }
+
+    /// [3] Allowance for 1px border on left and right
+    ///
+    .js-initialised.ds_side-navigation > .ds_side-navigation__list {
+
+        margin: 0 15px; ///[3]
+        max-height: var(--ds-side-nav-max-height);
+        overflow: hidden;
+
+        @media (prefers-reduced-motion: no-preference) {
+            transition: max-height $transition-in-time, padding $transition-in-time;
+        }
+    }
+
+    .js-initialised.ds_side-navigation #show-side-navigation:checked ~ .ds_side-navigation__list {
+        padding-bottom: 8px;
+        padding-top: 8px;
+    }
+}
+
+@include ds_media-query(medium) {
+    .ds_side-navigation {
+        border-width: 0;
+        line-height: 24px;
+
+        &__expand {
+            display: none;
+        }
+
+        &__list {
+            display: block !important;
+            margin: 0;
+            max-height: none !important;
+        }
+
+        #show-side-navigation {
+            display: none;
+        }
+    }
+}

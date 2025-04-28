@@ -1,0 +1,9 @@
+/*------------------------------------*\
+    CONTENT LABEL
+\*------------------------------------*/
+
+.ds_content-label {
+    @include ds_small-size;
+    font-weight: $normal;
+    margin: 0;
+}

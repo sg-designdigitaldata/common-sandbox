@@ -1,0 +1,47 @@
+{
+  "name": "wsw",
+  "version": "1.0.0",
+  "description": "Gulp setup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scotgovcbad/WSW.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scotgovcbad/WSW/issues"
+  },
+  "homepage": "https://github.com/scotgovcbad/WSW#readme",
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@scottish-government/design-system": "^2.3.2",
+    "@babel/preset-env": "^7.26.9",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.1",
+    "gulp": "^5.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^10.0.0",
+    "gulp-replace": "^1.1.4",
+    "gulp-sass": "^6.0.1",
+    "gulp-terser": "^2.1.0",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.86.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "dependencies": {
+    "caniuse-lite": "^1.0.30001707",
+    "glob-parent": "^6.0.2",
+    "lodash": "^4.17.21",
+    "lodash.stubfalse": "^4.13.0",
+    "nanoid": "^5.1.5"
+  }
+}
