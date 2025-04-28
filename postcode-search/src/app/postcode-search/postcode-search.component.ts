@@ -14,7 +14,9 @@ import axios from 'axios';
 export class PostcodeSearchComponent {
   postcode: string = '';
   addresses: string[] = [];
+  addressitems: string[] = [];
   localauthorities: string[] = [];
+  uprns: string[] = [];
   apiKey: string = 'nLWMMF3c567DLus9Tc1QVpAQzlOuBPji';
 
   async search() {
@@ -26,11 +28,15 @@ export class PostcodeSearchComponent {
       const response = await axios.get(url);
       const results = response.data.results;
 
+      this.addressitems = results
       this.addresses = results?.map((res: any) => res.DPA.ADDRESS) || [];
       this.localauthorities = results?.map((res: any) => res.DPA.LOCAL_CUSTODIAN_CODE_DESCRIPTION) || [];
+      this.uprns = results?.map((res: any) => res.DPA.UPRN) || [];
+
+      console.log('LAs:', this.localauthorities);
     } catch (err) {
       console.error('Error:', err);
-      this.addresses = ['Error retrieving data.'];
+      this.addressitems = ['Error retrieving data'];
     }
   }
 
