@@ -5,6 +5,6 @@ There are two dev containers to choose from. A .NET 8 (C#) environment, and a No
 
 Codespaces are configured to use the 4-core machine type (second lowest) by default. This balances cost and performance.
 
-# Address Lookup (Dotnet 9 - Blazor)
+# Address Lookup (.NET 9 - Blazor)
 ## Run me
 Once you open the branch on Codespaces, cd into `ApiVisualiser` and execute `dotnet run` in the terminal. Codespaces will expose the app on a port (5206, I think?) for you to connect to. It'll also try opening the app in a new tab, but your browser will probably block the pop up.
