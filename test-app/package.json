@@ -18,7 +18,7 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.49.1",
-		"@scottish-government/design-system": "^3.0.0",
+		"@scottish-government/design-system": "^3.0.1",
 		"@sveltejs/adapter-node": "^5.2.12",
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/kit": "^2.16.0",
