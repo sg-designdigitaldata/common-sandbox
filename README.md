@@ -26,3 +26,10 @@ Each team member should use a different development framework.
 - *Oksana*: Vue
 - *Cristian*: React
 
+### Stage Two - ScotAccount Integration
+
+Integrate the website with the ScotAccount identity service. Require users to sign in with their [ScotAccount](https://www.mygov.scot/scotaccount) account to access the PostCode lookup service. This is for two reasons:
+
+1. Gain experience of integrating an app/service with ScotAccount
+2. Test and verify the developer documentation for ScotAccount
+
