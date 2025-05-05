@@ -1,61 +1,65 @@
 <template>
-  <div class="postcode-lookup">
-    <h2>Postcode Address Lookup</h2>
-    <input v-model="postcode" placeholder="Enter postcode" />
-    <button @click="lookupPostcode">Lookup</button>
+  <div class="p-4 max-w-md mx-auto">
+    <h2 class="text-2xl font-bold mb-4">Postcode Lookup</h2>
 
-    <div v-if="error" class="error">{{ error }}</div>
-    <div v-if="address">
-      <p><strong>Postcode:</strong> {{ address.postcode }}</p>
-      <p><strong>Region:</strong> {{ address.region }}</p>
-      <p><strong>Country:</strong> {{ address.country }}</p>
-      <p><strong>Admin District:</strong> {{ address.admin_district }}</p>
-    </div>
+    <input
+      v-model="postcode"
+      @keyup.enter="fetchAddresses"
+      placeholder="Enter postcode"
+      class="border p-2 w-full rounded"
+    />
+
+    <button
+      @click="fetchAddresses"
+      class="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+    >
+      Search
+    </button>
+
+    <div v-if="error" class="text-red-500 mt-4">{{ error }}</div>
+
+    <ul v-if="addresses.length" class="mt-4">
+      <li v-for="(addr, idx) in addresses" :key="idx" class="border-b py-1">
+        {{ addr }}
+      </li>
+    </ul>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      postcode: '',
-      address: null,
-      error: ''
-    };
-  },
-  methods: {
-    async lookupPostcode() {
-      this.error = '';
-      this.address = null;
+<script setup>
+import { ref } from 'vue'
 
-      if (!this.postcode) {
-        this.error = 'Please enter a postcode.';
-        return;
-      }
+const postcode = ref('')
+const addresses = ref([])
+const error = ref('')
 
-      try {
-        const response = await fetch(`https://api.postcodes.io/postcodes/${this.postcode}`);
-        const data = await response.json();
+const fetchAddresses = async () => {
+  error.value = ''
+  addresses.value = []
 
-        if (data.status === 200) {
-          this.address = data.result;
-        } else {
-          this.error = 'Postcode not found.';
-        }
-      } catch (err) {
-        this.error = 'Error fetching postcode data.';
-      }
-    }
+  if (!postcode.value.trim()) {
+    error.value = 'Please enter a postcode.'
+    return
   }
-};
-</script>
 
-<style scoped>
-.postcode-lookup {
-  max-width: 400px;
-  margin: 20px auto;
+  try {
+    const apiKey = import.meta.env.OS_API_KEY
+    const res = await fetch(`https://api.os.uk/search/places/v1/postcode/${postcode.value}`, {
+      headers: {
+        Authorization: `Bearer ${apiKey}`
+      }
+    })
+
+    if (!res.ok) throw new Error(`Error: ${res.status}`)
+
+    const data = await res.json()
+    addresses.value = data.addresses || []
+
+    if (!addresses.value.length) {
+      error.value = 'No addresses found for this postcode.'
+    }
+  } catch (err) {
+    error.value = err.message || 'Failed to fetch data.'
+  }
 }
-.error {
-  color: red;
-}
-</style>
+</script>
