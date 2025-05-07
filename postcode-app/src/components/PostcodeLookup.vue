@@ -43,23 +43,24 @@ const fetchAddresses = async () => {
   }
 
   try {
-    const apiKey = import.meta.env.OS_API_KEY
-    const res = await fetch(`https://api.os.uk/search/places/v1/postcode/${postcode.value}`, {
-      headers: {
-        Authorization: `Bearer ${apiKey}`
-      }
-    })
+    console.log("API KEY:", process.env.VUE_APP_API_KEY);
 
+    const apiKey = process.env.VUE_APP_API_KEY;
+    const res = await fetch(`https://api.os.uk/search/places/v1/postcode?postcode=${postcode.value}&key=${apiKey}`)
+
+    console.log(apiKey);
     if (!res.ok) throw new Error(`Error: ${res.status}`)
 
     const data = await res.json()
+    console.log(data)
+
     addresses.value = data.addresses || []
 
-    if (!addresses.value.length) {
-      error.value = 'No addresses found for this postcode.'
-    }
+    
   } catch (err) {
+    console.error("Fetch failed:", err)
     error.value = err.message || 'Failed to fetch data.'
   }
 }
+
 </script>
