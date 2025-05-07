@@ -2,17 +2,10 @@
   <div class="p-4 max-w-md mx-auto">
     <h2 class="text-2xl font-bold mb-4">Postcode Lookup</h2>
 
-    <input
-      v-model="postcode"
-      @keyup.enter="fetchAddresses"
-      placeholder="Enter postcode"
-      class="border p-2 w-full rounded"
-    />
+    <input v-model="postcode" @keyup.enter="fetchAddresses" placeholder="Enter postcode"
+      class="border p-2 w-full rounded" />
 
-    <button
-      @click="fetchAddresses"
-      class="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-    >
+    <button @click="fetchAddresses" class="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
       Search
     </button>
 
@@ -43,12 +36,11 @@ const fetchAddresses = async () => {
   }
 
   try {
-    console.log("API KEY:", process.env.VUE_APP_API_KEY);
-
+    console.log(process.env.VUE_APP_API_KEY);
+    console.log(postcode.value)
     const apiKey = process.env.VUE_APP_API_KEY;
-    const res = await fetch(`https://api.os.uk/search/places/v1/postcode?postcode=${postcode.value}&key=${apiKey}`)
+    const res = await fetch(`https://api.os.uk/search/places/v1/postcode?postcode=${encodeURIComponent(postcode.value)}&key=${apiKey}`)
 
-    console.log(apiKey);
     if (!res.ok) throw new Error(`Error: ${res.status}`)
 
     const data = await res.json()
@@ -56,7 +48,7 @@ const fetchAddresses = async () => {
 
     addresses.value = data.addresses || []
 
-    
+
   } catch (err) {
     console.error("Fetch failed:", err)
     error.value = err.message || 'Failed to fetch data.'
