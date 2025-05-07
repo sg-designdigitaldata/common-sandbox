@@ -20,8 +20,12 @@
 			errorMessage = 'Unable to fetch addresses';
 		} else {
 			if (response != null) {
-				var body = await response.json();
-				addresses = body.results;
+				var json = await response.json();
+				if (json.header.totalresults > 0) {
+					addresses = json.results;
+				} else {
+					errorMessage = 'No addresses found at that postcode';
+				}
 			}
 		}
 	}
@@ -50,8 +54,8 @@
 	<p class="ds_question__error-message" id="error-message">{errorMessage}</p>
 {/if}
 
-{#if addresses}
-	<div class="ds_select-wrapper ds_input--fluid-one-third">
+{#if addresses.length > 0}
+	<div class="ds_select-wrapper ds_input--fluid-one-half">
 		<select name="finalAddress" id="finalAddress" multiple class="ds_select">
 			{#each addresses as addr}
 				<option value={addr.DPA.UDPRN}>{addr.DPA.ADDRESS}</option>

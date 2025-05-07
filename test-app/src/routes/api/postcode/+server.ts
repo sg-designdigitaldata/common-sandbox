@@ -5,7 +5,6 @@ export const GET: RequestHandler = async ({ url}) => {
 
     const pCode = url.searchParams.get('postcode') ?? '';
 
-    console.log(pCode);
     if(pCode === '') {
         error(400, 'Must specify a postcode');
     }
