@@ -9,6 +9,7 @@
 		address = '';
 		if (!postcode.trim()) {
 			errorMessage = 'Please enter a valid postcode';
+			addresses = [];
 			return {};
 		}
 
@@ -22,9 +23,11 @@
 			if (response != null) {
 				var json = await response.json();
 				if (json.header.totalresults > 0) {
+					console.log(`${json.header.totalresults} addresses found`)
 					addresses = json.results;
 				} else {
 					errorMessage = 'No addresses found at that postcode';
+					addresses = [];
 				}
 			}
 		}
@@ -48,7 +51,7 @@
 		>Find address</button
 	>
 </fieldset>
-<p><button class="ds_link ds_no-margin" type="button">Or type in your full address</button></p>
+
 
 {#if errorMessage}
 	<p class="ds_question__error-message" id="error-message">{errorMessage}</p>
@@ -63,3 +66,5 @@
 		</select>
 	</div>
 {/if}
+
+<p><button class="ds_link ds_no-margin" type="button">Or type in your full address</button></p>
