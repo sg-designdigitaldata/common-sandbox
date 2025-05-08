@@ -1,0 +1,33 @@
+/*------------------------------------*\
+    ARTICLE HEADER
+    title block for articles
+\*------------------------------------*/
+
+.ds_page-header {
+    margin: 1rem 0 2rem;
+
+    &__title {
+        margin-bottom: 0;
+    }
+
+    &__metadata {
+        margin-top: 0.5rem;
+    }
+
+    @include ds_media-query(medium) {
+        margin-top: 2rem;
+
+        &__label + &__title {
+            margin-top: -0.5rem;
+        }
+    }
+}
+
+// Increase top margin to offset margin collapse between Error summary and Page header if siblings
+.ds_error-summary + .ds_page-header {
+    margin-top: 2.5rem;
+
+    @include ds_media-query(medium) {
+        margin-top: 4rem;
+    }
+}

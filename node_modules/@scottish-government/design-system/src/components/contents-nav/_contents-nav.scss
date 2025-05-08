@@ -1,0 +1,43 @@
+/*------------------------------------*\
+    CONTENTS NAV
+\*------------------------------------*/
+
+
+
+
+.ds_contents-nav {
+
+    &__title {
+        @include ds_h3-size;
+        margin: 0;
+        padding: 0;
+        @include ds_responsive-margin(1, bottom);
+    }
+
+    &__list {
+        @include ds_small-size;
+        @include ds_responsive-margin(6, bottom);
+        list-style: none;
+        margin-left: 0;
+        padding-left: 32px;
+    }
+
+    &__item {
+        position: relative;
+
+        &::before {
+            border-top: 1px solid currentColor;
+            content: "";
+            height: 1px;
+            left: -32px;
+            overflow: hidden;
+            position: absolute;
+            top: 12px;
+            width: 20px;
+        }
+    }
+
+    &__link.ds_current {
+        font-weight: $bold;
+    }
+}

@@ -1,0 +1,113 @@
+/*------------------------------------*\
+    SEARCH FILTERS
+\*------------------------------------*/
+
+.ds_search-filters {
+    margin-bottom: 0.5rem;
+
+    &__title {
+        @include ds_responsive-padding(1, bottom, false, -1px);
+        @include ds_responsive-padding(1, top);
+        margin-bottom: 0;
+        margin-top: 0;
+
+        &:not(:first-child) {
+            margin-top: 0;
+        }
+    }
+
+    /**
+    [1] provides room for yellow focus outline on checkboxes
+    */
+    &__scrollable {
+        margin-left: -0.25rem; /* [1] */
+        max-height: 33.333333vh;
+        padding-left: 0.25rem; /* [1] */
+        padding-right: 0.5rem;
+        overflow-y: auto;
+
+        @include ds_scrollbar;
+    }
+
+    &__filter-count {
+        color: $ds_colour__text;
+        font-weight: normal;
+    }
+
+    &__checkboxes {
+        @include ds_small-size;
+
+        .ds_checkbox__input {
+            top: 0.25rem;
+        }
+
+        .ds_checkbox__label {
+            padding-right: 0;
+        }
+
+        .ds_checkbox--small {
+            margin-bottom: 0;
+        }
+    }
+
+    .ds_accordion.js-initialised .ds_accordion-item__body {
+        @include ds_responsive-padding(2, right);
+        @include ds_responsive-padding(5, bottom);
+    }
+
+    .ds_accordion-item__body .ds_question:last-child {
+        .ds_datepicker,
+        .ds_input__wrapper {
+            margin-bottom: 0;
+        }
+    }
+
+    &.js-initialised .js-apply-filter {
+        @include ds_media-query(medium) {
+            display: none;
+        }
+    }
+}
+
+@include ds_media-query(medium-down) {
+    .ds_search-filters__title {
+        @include ds_visually-hidden;
+    }
+}
+
+@include ds_media-query(medium) {
+    .ds_search-filters {
+        &__title {
+            display: block;
+        }
+
+        .ds_details__summary,
+        #filters-toggle {
+            display: none;
+        }
+
+        .ds_details__text {
+            display: block;
+
+            border-left: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ds_checkbox--small .ds_checkbox__label {
+            &::before {
+                top: 0.25rem;
+            }
+
+            &::after {
+                top: 0.6875rem;
+            }
+        }
+    }
+
+    .ds_search-filters .ds_accordion-item__indicator {
+        font-size: px-to-rem($small-size);
+        line-height: 1.5rem;
+        margin-top: 0.25rem;
+    }
+}

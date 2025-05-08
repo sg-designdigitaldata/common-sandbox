@@ -17,6 +17,14 @@
       </li>
     </ul>
   </div>
+   <div>
+    <h2>Addresses</h2>
+    <ul>
+      <li v-for="(address, index) in addresses" :key="index">
+        {{ address }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup>
